@@ -1,0 +1,23 @@
+services:
+  shop:
+    build: .
+    ports:
+      - "${SHOP_PORT:-8080}:80"
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:8080/shop}
+      APP_DEBUG: "false"
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}
+      SHOP_DEMO_RESET: ${SHOP_DEMO_RESET:-false}
+      SHOP_PAYMENT_DRIVER: ${SHOP_PAYMENT_DRIVER:-sandbox}
+      YOOKASSA_SHOP_ID: ${YOOKASSA_SHOP_ID:-}
+      YOOKASSA_SECRET_KEY: ${YOOKASSA_SECRET_KEY:-}
+      CDEK_API_URL: ${CDEK_API_URL:-https://api.edu.cdek.ru/v2}
+      CDEK_CLIENT_ID: ${CDEK_CLIENT_ID:-wqGwiQx0gg8mLtiEKsUinjVSICCjtTEP}
+      CDEK_CLIENT_SECRET: ${CDEK_CLIENT_SECRET:-RmAmgvSgSl1yirlz9QupbzOJVqhCxcP5}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    volumes:
+      - shop-data:/data
+    restart: unless-stopped
+
+volumes:
+  shop-data:

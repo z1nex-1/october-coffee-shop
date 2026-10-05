@@ -1,0 +1,16 @@
+.git
+.env
+vendor
+modules
+node_modules
+themes/coffee/assets/dist
+storage/database.sqlite
+storage/logs/*.log
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/cms/cache/*
+storage/cms/combiner/*
+storage/cms/twig/*
+docs
+tests
