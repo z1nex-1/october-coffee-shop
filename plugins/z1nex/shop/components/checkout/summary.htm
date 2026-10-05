@@ -1,0 +1,16 @@
+{% set cart = __SELF__.cart %}
+<h2>Заказ</h2>
+<ul class="summary-lines">
+    {% for line in cart.lines %}
+        <li><span>{{ line.product.name }} × {{ line.quantity }}</span><span>{{ line.sum|number_format(0, ',', ' ') }} ₽</span></li>
+    {% endfor %}
+</ul>
+<p class="summary-row"><span>Вес с упаковкой</span><span>{{ (cart.weight / 1000)|number_format(2, ',', ' ') }} кг</span></p>
+<p class="summary-row"><span>Товары</span><span>{{ cart.itemsTotal|number_format(0, ',', ' ') }} ₽</span></p>
+<p class="summary-row"><span>Доставка</span>
+    <span>
+        {% if __SELF__.delivery.method %}{{ cart.deliveryPrice|number_format(0, ',', ' ') }} ₽{% else %}—{% endif %}
+    </span>
+</p>
+{% if cart.isFreeDelivery %}<p class="ok">Бесплатная доставка от 5 000 ₽</p>{% endif %}
+<p class="summary-row total"><span>Итого</span><span>{{ cart.total|number_format(0, ',', ' ') }} ₽</span></p>

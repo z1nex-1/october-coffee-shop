@@ -1,0 +1,49 @@
+<div class="checkout">
+    <form class="checkout-form" data-request="{{ __SELF__ }}::onPlaceOrder" data-request-validate data-request-flash>
+        <section>
+            <h2>Куда везём</h2>
+            <div class="field city-field">
+                <label for="city-query">Город</label>
+                <input id="city-query" type="text" name="city_query" autocomplete="off" placeholder="Начните вводить: Казань"
+                       value="{{ __SELF__.delivery.city }}"
+                       data-request="{{ __SELF__ }}::onSuggestCity"
+                       data-track-input="350">
+                <div id="city-suggest"></div>
+                <div class="error" data-validate-for="city_query"></div>
+            </div>
+            <div id="delivery-options">
+                {% partial __SELF__ ~ '::delivery' %}
+            </div>
+            <div class="error" data-validate-for="tariff"></div>
+        </section>
+
+        <section>
+            <h2>Получатель</h2>
+            <div class="field">
+                <label for="name">Имя</label>
+                <input id="name" name="name" autocomplete="name">
+                <div class="error" data-validate-for="name"></div>
+            </div>
+            <div class="field">
+                <label for="phone">Телефон</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00">
+                <div class="error" data-validate-for="phone"></div>
+            </div>
+            <div class="field">
+                <label for="email">Почта для чека</label>
+                <input id="email" name="email" type="email" autocomplete="email">
+                <div class="error" data-validate-for="email"></div>
+            </div>
+            <div class="field">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" name="comment" rows="2" placeholder="Например, помолоть под турку"></textarea>
+            </div>
+        </section>
+
+        <button class="btn btn-wide" type="submit" data-attach-loading>Перейти к оплате</button>
+    </form>
+
+    <aside id="checkout-summary">
+        {% partial __SELF__ ~ '::summary' %}
+    </aside>
+</div>

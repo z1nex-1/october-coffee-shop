@@ -1,0 +1,14 @@
+{% if cities %}
+    <ul class="suggest">
+        {% for city in cities %}
+            <li>
+                <button type="button"
+                        data-request="shopCheckout::onSelectCity"
+                        data-request-data="city_code: {{ city.code }}, city_name: '{{ city.name|split(',')|first|e('js') }}'"
+                        data-request-success="$('#city-query').val('{{ city.name|split(',')|first|e('js') }}')">
+                    {{ city.name }}
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

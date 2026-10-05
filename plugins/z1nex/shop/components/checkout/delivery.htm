@@ -1,0 +1,57 @@
+{% set delivery = __SELF__.delivery %}
+{% set quotes = __SELF__.quotes %}
+{% set free = __SELF__.cart.isFreeDelivery %}
+{% set current = delivery.method ~ ':' ~ delivery.tariff %}
+
+{% if quotes %}
+    <div class="options">
+        {% for group, method in {'pvz': 'cdek_pvz', 'courier': 'cdek_courier'} %}
+            {% for tariff in quotes[group] %}
+                <label class="option">
+                    <input type="radio" name="tariff" value="{{ method }}:{{ tariff.code }}"
+                           data-request="{{ __SELF__ }}::onSelectTariff"
+                           {{ current == method ~ ':' ~ tariff.code ? 'checked' }}>
+                    <span class="option-name">
+                        СДЭК, {{ group == 'pvz' ? 'пункт выдачи' : 'курьер' }}
+                        <small>{{ tariff.name }}, {{ tariff.days_min }}–{{ tariff.days_max }} дн.</small>
+                    </span>
+                    <span class="option-price">
+                        {% if free %}<s>{{ tariff.price }} ₽</s> 0 ₽{% else %}{{ tariff.price }} ₽{% endif %}
+                    </span>
+                </label>
+            {% endfor %}
+        {% endfor %}
+        <label class="option">
+            <input type="radio" name="tariff" value="pickup:" data-request="{{ __SELF__ }}::onSelectTariff" {{ delivery.method == 'pickup' ? 'checked' }}>
+            <span class="option-name">Самовывоз из обжарочной <small>Москва, после обжарки</small></span>
+            <span class="option-price">0 ₽</span>
+        </label>
+    </div>
+
+    {% if (quotes.pvz|first).estimate|default(false) %}
+        <p class="muted">API СДЭК сейчас не отвечает, цены по запасной тарифной сетке.</p>
+    {% endif %}
+
+    {% if delivery.method == 'cdek_pvz' %}
+        <div class="field">
+            <label for="point">Пункт выдачи</label>
+            <select id="point" name="point">
+                <option value="">Выберите пункт</option>
+                {% for point in __SELF__.points %}
+                    <option value="{{ point.code }}">{{ point.address }}{% if point.work_time %} · {{ point.work_time }}{% endif %}</option>
+                {% endfor %}
+            </select>
+            <div class="error" data-validate-for="point"></div>
+        </div>
+    {% elseif delivery.method == 'cdek_courier' %}
+        <div class="field">
+            <label for="address">Адрес</label>
+            <input id="address" name="address" placeholder="Улица, дом, квартира" autocomplete="street-address">
+            <div class="error" data-validate-for="address"></div>
+        </div>
+    {% endif %}
+{% elseif delivery.city_code %}
+    <p class="muted">Не удалось посчитать доставку в этот город.</p>
+{% else %}
+    <p class="muted">Выберите город, и мы посчитаем доставку по тарифам СДЭК.</p>
+{% endif %}
