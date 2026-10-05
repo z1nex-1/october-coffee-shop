@@ -1,0 +1,54 @@
+{
+    "name": "z1nex/october-coffee-shop",
+    "description": "Демо-магазин обжарочной на October CMS: AJAX-корзина, ЮKassa с вебхуками, доставка СДЭК",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.8",
+        "october/rain": "1.0.*",
+        "october/system": "1.0.*",
+        "october/backend": "1.0.*",
+        "october/cms": "1.0.*",
+        "laravel/framework": "~5.5.40"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.7",
+        "phpunit/phpunit": "~6.5",
+        "phpunit/phpunit-selenium": "~1.2",
+        "meyfa/phpunit-assert-gd": "1.1.0",
+        "squizlabs/php_codesniffer": "3.*",
+        "php-parallel-lint/php-parallel-lint": "^1.0"
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/concerns/InteractsWithAuthentication.php",
+            "tests/fixtures/backend/models/UserFixture.php",
+            "tests/TestCase.php",
+            "tests/UiTestCase.php",
+            "tests/PluginTestCase.php"
+        ]
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php artisan key:generate",
+            "php artisan package:discover"
+        ],
+        "post-update-cmd": [
+            "php artisan october:util set build",
+            "php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "audit": {
+            "block-insecure": false
+        },
+        "allow-plugins": {
+            "wikimedia/composer-merge-plugin": true,
+            "composer/installers": true,
+            "kylekatarnls/update-helper": false
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

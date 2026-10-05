@@ -1,0 +1,13 @@
+/vendor
+/modules
+/node_modules
+/bootstrap/compiled.php
+/themes/coffee/assets/dist
+/storage/database.sqlite
+.env
+.DS_Store
+.idea
+.phpunit.result.cache
+/storage/logs/*.log
+/storage/framework/*.php
+.phpunit.result.cache
