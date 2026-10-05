@@ -1,11 +1,6 @@
 <?php
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
@@ -17,10 +12,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
-
-    //
-    // Helpers
-    //
 
     protected static function callProtectedMethod($object, $name, $params = [])
     {
