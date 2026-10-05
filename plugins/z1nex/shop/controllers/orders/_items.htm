@@ -1,0 +1,15 @@
+<table class="table data">
+    <thead><tr><th>Товар</th><th>Цена</th><th>Кол-во</th><th>Сумма</th></tr></thead>
+    <tbody>
+    <?php foreach ($formModel->items as $item): ?>
+        <tr>
+            <td><?= e($item->name) ?></td>
+            <td><?= number_format($item->price, 0, ',', ' ') ?> ₽</td>
+            <td><?= $item->quantity ?></td>
+            <td><?= number_format($item->sum, 0, ',', ' ') ?> ₽</td>
+        </tr>
+    <?php endforeach ?>
+    <tr><td colspan="3">Доставка</td><td><?= number_format($formModel->delivery_price, 0, ',', ' ') ?> ₽</td></tr>
+    <tr><th colspan="3">Итого</th><th><?= number_format($formModel->total, 0, ',', ' ') ?> ₽</th></tr>
+    </tbody>
+</table>

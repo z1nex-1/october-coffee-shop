@@ -1,0 +1,19 @@
+<?php if ($formModel->events->isEmpty()): ?>
+    <p class="text-muted">Событий оплаты нет.</p>
+<?php else: ?>
+<table class="table data">
+    <thead><tr><th>Время</th><th>Источник</th><th>Событие</th><th>Результат</th><th>Комментарий</th><th>IP</th></tr></thead>
+    <tbody>
+    <?php foreach ($formModel->events as $event): ?>
+        <tr>
+            <td><?= $event->created_at->format('d.m H:i:s') ?></td>
+            <td><?= e($event->source) ?></td>
+            <td><code><?= e($event->event) ?></code></td>
+            <td><?= e($event->result_label) ?></td>
+            <td><?= e($event->message) ?></td>
+            <td><?= e($event->ip) ?></td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>
+<?php endif ?>

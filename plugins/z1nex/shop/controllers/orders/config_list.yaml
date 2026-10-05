@@ -1,0 +1,13 @@
+list: $/z1nex/shop/models/order/columns.yaml
+modelClass: Z1nex\Shop\Models\Order
+title: Заказы
+noRecordsMessage: backend::lang.list.no_records
+recordsPerPage: 25
+showSetup: true
+defaultSort:
+    column: id
+    direction: desc
+recordUrl: z1nex/shop/orders/update/:id
+toolbar:
+    search:
+        prompt: backend::lang.list.search_prompt

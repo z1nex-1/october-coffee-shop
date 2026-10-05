@@ -1,0 +1,7 @@
+1.0.1:
+    - Каталог, заказы, журнал платёжных уведомлений
+    - create_products_table.php
+    - create_orders_table.php
+    - create_payment_events_table.php
+    - create_sandbox_payments_table.php
+    - seed_products.php

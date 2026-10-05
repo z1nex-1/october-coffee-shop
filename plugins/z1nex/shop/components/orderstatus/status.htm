@@ -1,0 +1,54 @@
+{% set order = __SELF__.order %}
+<div class="order {{ order.status }}" data-pending="{{ order.isPending ? 1 : 0 }}">
+    <p class="order-number">Заказ {{ order.number }}</p>
+    <h1 class="order-state">{{ order.status_label|capitalize }}</h1>
+
+    {% if order.isPending %}
+        <p>Ждём подтверждения от платёжной системы, страница обновится сама.</p>
+        {% if order.payment_url %}<a class="btn" href="{{ order.payment_url }}">Вернуться к оплате</a>{% endif %}
+    {% elseif order.status == 'paid' %}
+        <p>Спасибо! Обжарим в ближайший обжарочный день и отправим.</p>
+    {% elseif order.status == 'canceled' %}
+        <p>Оплата не прошла, заказ отменён. Корзину можно собрать заново.</p>
+    {% endif %}
+
+    <div class="order-grid">
+        <section>
+            <h2>Состав</h2>
+            <ul class="summary-lines">
+                {% for item in order.items %}
+                    <li><span>{{ item.name }} × {{ item.quantity }}</span><span>{{ item.sum|number_format(0, ',', ' ') }} ₽</span></li>
+                {% endfor %}
+            </ul>
+            <p class="summary-row"><span>Доставка</span><span>{{ order.delivery_price|number_format(0, ',', ' ') }} ₽</span></p>
+            <p class="summary-row total"><span>Итого</span><span>{{ order.total|number_format(0, ',', ' ') }} ₽</span></p>
+            <p class="muted">
+                {{ order.delivery_method_label }}{% if order.delivery_city %}, {{ order.delivery_city }}{% endif %}
+                {% if order.delivery_tariff_name %}<br>{{ order.delivery_tariff_name }}{% if order.delivery_days %}, {{ order.delivery_days }} дн.{% endif %}{% endif %}
+                {% if order.delivery_point_address %}<br>{{ order.delivery_point_address }}{% endif %}
+                {% if order.delivery_address %}<br>{{ order.delivery_address }}{% endif %}
+            </p>
+        </section>
+
+        <section>
+            <h2>Журнал оплаты</h2>
+            <p class="muted">Каждое уведомление и проверка статуса. Повторы не меняют заказ.</p>
+            <ol class="events">
+                {% for event in order.events %}
+                    <li class="event {{ event.result }}">
+                        <span class="event-time">{{ event.created_at|date('H:i:s') }}</span>
+                        <span class="event-source">{{ event.source }}</span>
+                        <span class="event-name">{{ event.event }}</span>
+                        <span class="event-result">{{ event.result_label }}</span>
+                        <span class="event-message">{{ event.message }}</span>
+                    </li>
+                {% endfor %}
+            </ol>
+            {% if __SELF__.notificationUrl and not order.isPending %}
+                <button class="btn btn-ghost" type="button"
+                        data-resend-notification="{{ __SELF__.notificationUrl }}"
+                        data-webhook="{{ __SELF__.webhookUrl }}">Прислать уведомление ещё раз</button>
+            {% endif %}
+        </section>
+    </div>
+</div>

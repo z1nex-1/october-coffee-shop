@@ -1,0 +1,2 @@
+<?php $colors = ['paid' => '#2f8a4c', 'pending_payment' => '#c27c0e', 'canceled' => '#b3362a', 'shipped' => '#2f6aa8']; ?>
+<span style="display:inline-block;padding:2px 9px;border-radius:10px;color:#fff;font-size:12px;white-space:nowrap;background:<?= $colors[$record->status] ?? '#888' ?>"><?= e($record->status_label) ?></span>

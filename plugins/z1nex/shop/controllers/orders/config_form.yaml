@@ -1,0 +1,7 @@
+name: Заказ
+form: $/z1nex/shop/models/order/fields.yaml
+modelClass: Z1nex\Shop\Models\Order
+defaultRedirect: z1nex/shop/orders
+update:
+    redirect: z1nex/shop/orders
+    redirectClose: z1nex/shop/orders

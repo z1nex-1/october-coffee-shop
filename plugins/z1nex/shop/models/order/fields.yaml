@@ -1,0 +1,78 @@
+fields:
+    number:
+        label: Номер
+        span: left
+        disabled: true
+    status:
+        label: Статус
+        type: dropdown
+        span: right
+        comment: Оплату меняет только обработчик платежей, вручную — отгрузка или отмена
+tabs:
+    fields:
+        _items:
+            tab: Состав
+            type: partial
+            path: $/z1nex/shop/controllers/orders/_items.htm
+        customer_name:
+            tab: Покупатель
+            label: Имя
+            span: left
+        phone:
+            tab: Покупатель
+            label: Телефон
+            span: right
+        email:
+            tab: Покупатель
+            label: Почта
+            span: left
+        comment:
+            tab: Покупатель
+            label: Комментарий
+            type: textarea
+            size: tiny
+            disabled: true
+        delivery_method:
+            tab: Доставка
+            label: Способ
+            type: dropdown
+            options: getDeliveryMethodOptions
+            disabled: true
+            span: left
+        delivery_city:
+            tab: Доставка
+            label: Город
+            disabled: true
+            span: right
+        delivery_tariff_name:
+            tab: Доставка
+            label: Тариф СДЭК
+            disabled: true
+            span: left
+        delivery_days:
+            tab: Доставка
+            label: Срок, дней
+            disabled: true
+            span: right
+        delivery_point_address:
+            tab: Доставка
+            label: Пункт выдачи
+            disabled: true
+        delivery_address:
+            tab: Доставка
+            label: Адрес курьеру
+        payment_id:
+            tab: Оплата
+            label: ID платежа
+            disabled: true
+            span: left
+        paid_at:
+            tab: Оплата
+            label: Оплачен
+            type: datepicker
+            disabled: true
+            span: right
+        _events:
+            tab: Оплата
+            type: partial
+            path: $/z1nex/shop/controllers/orders/_events.htm

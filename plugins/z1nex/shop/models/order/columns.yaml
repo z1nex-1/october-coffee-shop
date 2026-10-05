@@ -1,0 +1,32 @@
+columns:
+    number:
+        label: Номер
+        searchable: true
+    created_at:
+        label: Создан
+        type: datetime
+        format: d.m.Y H:i
+    customer_name:
+        label: Покупатель
+        searchable: true
+    phone:
+        label: Телефон
+        searchable: true
+    status:
+        label: Статус
+        type: partial
+        path: $/z1nex/shop/models/order/_status_column.htm
+    delivery_method:
+        label: Доставка
+        select: delivery_method
+        type: partial
+        path: $/z1nex/shop/models/order/_delivery_column.htm
+    delivery_city:
+        label: Город
+    total:
+        label: Сумма
+        type: number
+    payment_id:
+        label: Платёж
+        invisible: true
+        searchable: true
