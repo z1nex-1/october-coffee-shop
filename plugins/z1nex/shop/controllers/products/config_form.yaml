@@ -1,0 +1,10 @@
+name: Товар
+form: $/z1nex/shop/models/product/fields.yaml
+modelClass: Z1nex\Shop\Models\Product
+defaultRedirect: z1nex/shop/products
+create:
+    redirect: z1nex/shop/products/update/:id
+    redirectClose: z1nex/shop/products
+update:
+    redirect: z1nex/shop/products
+    redirectClose: z1nex/shop/products

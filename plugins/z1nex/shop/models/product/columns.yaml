@@ -1,0 +1,20 @@
+columns:
+    name:
+        label: Название
+        searchable: true
+    sku:
+        label: Артикул
+        searchable: true
+    roast:
+        label: Обжарка
+        type: partial
+        path: $/z1nex/shop/models/product/_roast_column.htm
+    weight:
+        label: Вес, г
+        type: number
+    price:
+        label: Цена, ₽
+        type: number
+    is_active:
+        label: В продаже
+        type: switch

@@ -1,0 +1,47 @@
+{% set cart = __SELF__.cart %}
+{% if cart.isEmpty %}
+    <div class="empty">
+        <p>В корзине пусто.</p>
+        <a class="btn" href="{{ 'index'|page }}">К каталогу</a>
+    </div>
+{% else %}
+    <table class="cart-table">
+        <thead>
+            <tr><th>Кофе</th><th>Цена</th><th>Количество</th><th>Сумма</th><th></th></tr>
+        </thead>
+        <tbody>
+        {% for line in cart.lines %}
+            <tr>
+                <td>{{ line.product.name }} <small>{{ line.product.weight_label }}</small></td>
+                <td>{{ line.product.price|number_format(0, ',', ' ') }} ₽</td>
+                <td>
+                    <select name="quantity"
+                            data-request="shopCart::onSetQty"
+                            data-request-data="id: {{ line.product.id }}"
+                            data-request-success="$(document).trigger('cart:changed', [data.cart, 'page'])">
+                        {% for q in 1..20 %}
+                            <option value="{{ q }}" {{ q == line.quantity ? 'selected' }}>{{ q }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>{{ line.sum|number_format(0, ',', ' ') }} ₽</td>
+                <td>
+                    <button class="link"
+                            data-request="shopCart::onRemove"
+                            data-request-data="id: {{ line.product.id }}"
+                            data-request-success="$(document).trigger('cart:changed', [data.cart, 'page'])">убрать</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="cart-total">
+        <p>Товары: <b>{{ cart.itemsTotal|number_format(0, ',', ' ') }} ₽</b></p>
+        {% if cart.isFreeDelivery %}
+            <p class="ok">Доставка СДЭК бесплатно</p>
+        {% else %}
+            <p class="muted">До бесплатной доставки {{ cart.untilFreeDelivery|number_format(0, ',', ' ') }} ₽</p>
+        {% endif %}
+        <a class="btn" href="{{ 'checkout'|page }}">Оформить</a>
+    </div>
+{% endif %}

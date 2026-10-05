@@ -1,0 +1,13 @@
+list: $/z1nex/shop/models/product/columns.yaml
+modelClass: Z1nex\Shop\Models\Product
+title: Товары
+noRecordsMessage: backend::lang.list.no_records
+recordsPerPage: 50
+defaultSort:
+    column: sort_order
+    direction: asc
+recordUrl: z1nex/shop/products/update/:id
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: backend::lang.list.search_prompt

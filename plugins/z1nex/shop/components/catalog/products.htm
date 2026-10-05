@@ -1,0 +1,20 @@
+<div class="grid">
+    {% for product in __SELF__.products %}
+        <article class="product">
+            {% partial 'pack' color=product.color name=product.name weight=product.weight_label %}
+            <h3>{{ product.name }}</h3>
+            <p class="meta">{{ product.origin }} · {{ product.process }} · {{ product.roast_label }}</p>
+            <p class="notes">{{ product.notes }}</p>
+            <div class="buy">
+                <span class="price">{{ product.price|number_format(0, ',', ' ') }} ₽ <small>/ {{ product.weight_label }}</small></span>
+                <button class="btn"
+                        data-request="shopCart::onAdd"
+                        data-request-data="id: {{ product.id }}"
+                        data-request-success="$(document).trigger('cart:changed', [data.cart, 'catalog'])"
+                        data-attach-loading>В корзину</button>
+            </div>
+        </article>
+    {% else %}
+        <p class="empty">Такой обжарки сейчас нет.</p>
+    {% endfor %}
+</div>

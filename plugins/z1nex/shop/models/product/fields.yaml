@@ -1,0 +1,57 @@
+fields:
+    name:
+        label: Название
+        span: left
+    slug:
+        label: Адрес
+        span: right
+        preset:
+            field: name
+            type: slug
+tabs:
+    fields:
+        sku:
+            tab: Товар
+            label: Артикул
+            span: left
+        is_active:
+            tab: Товар
+            label: В продаже
+            type: switch
+            span: right
+            default: true
+        price:
+            tab: Товар
+            label: Цена, ₽
+            type: number
+            span: left
+        weight:
+            tab: Товар
+            label: Вес пачки, г
+            type: number
+            span: right
+        origin:
+            tab: Кофе
+            label: Происхождение
+            span: left
+        process:
+            tab: Кофе
+            label: Обработка
+            span: right
+        roast:
+            tab: Кофе
+            label: Обжарка
+            type: dropdown
+            span: left
+        color:
+            tab: Кофе
+            label: Цвет пачки
+            type: colorpicker
+            span: right
+        notes:
+            tab: Кофе
+            label: Ноты во вкусе
+        description:
+            tab: Кофе
+            label: Описание
+            type: textarea

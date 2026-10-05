@@ -1,0 +1,11 @@
+{% set update = "'" ~ __SELF__ ~ "::products': '#catalog-products'" %}
+<form class="filters" aria-label="Обжарка">
+    <label class="chip"><input type="radio" name="roast" value="" data-request="{{ __SELF__ }}::onFilter" data-request-update="{{ update }}" {{ __SELF__.roast ? '' : 'checked' }}> Все</label>
+    {% for code, label in __SELF__.roasts %}
+        <label class="chip"><input type="radio" name="roast" value="{{ code }}" data-request="{{ __SELF__ }}::onFilter" data-request-update="{{ update }}" {{ __SELF__.roast == code ? 'checked' }}> {{ label }}</label>
+    {% endfor %}
+</form>
+
+<div id="catalog-products">
+    {% partial __SELF__ ~ '::products' %}
+</div>
