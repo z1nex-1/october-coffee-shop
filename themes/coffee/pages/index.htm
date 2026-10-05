@@ -5,8 +5,70 @@ layout = "default"
 [shopCatalog]
 ==
 <section class="hero">
-    <h1>Кофе, обжаренный под ваш заказ</h1>
-    <p>Обжариваем по вторникам и пятницам, отправляем СДЭКом на следующий день. От 5 000 ₽ доставка бесплатно.</p>
+    <img class="hero-photo" src="{{ 'assets/images/hero.jpg'|theme }}" alt="" fetchpriority="high">
+    <div class="wrap hero-inner">
+        <p class="eyebrow">Specialty-кофе свежей обжарки</p>
+        <h1>Кофе, обжаренный <em>под ваш заказ</em></h1>
+        <p class="lead">Восемь лотов из Африки и Латинской Америки. Обжариваем по вторникам и пятницам и отправляем СДЭКом на следующий день.</p>
+        <div class="hero-actions">
+            <a class="btn btn-light" href="#catalog">Выбрать кофе {% partial 'icon' name='arrow-right' %}</a>
+            <a class="btn btn-outline" href="#process">Как мы работаем</a>
+        </div>
+        <ul class="facts">
+            <li><b>Вт и Пт</b><span>дни обжарки</span></li>
+            <li><b>1 день</b><span>от обжарки до отправки</span></li>
+            <li><b>5 000 ₽</b><span>и доставка бесплатно</span></li>
+        </ul>
+    </div>
 </section>
 
-{% component 'shopCatalog' %}
+<section class="section wrap" id="catalog">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">Каталог</p>
+            <h2>Что сейчас в обжарке</h2>
+        </div>
+        <p class="muted">Светлая обжарка — для фильтра и воронки, средняя — универсальная, тёмная — для эспрессо и молока.</p>
+    </div>
+    {% component 'shopCatalog' %}
+</section>
+
+<section class="section process" id="process">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Как мы работаем</p>
+                <h2>От фермы до вашей чашки</h2>
+            </div>
+        </div>
+        <div class="steps">
+            <article class="step">
+                <img src="{{ 'assets/images/origin.jpg'|theme }}" alt="Сушка кофейных ягод на ферме" loading="lazy">
+                <span class="step-num">01</span>
+                <h3>Зелёное зерно</h3>
+                <p>Берём лоты с известной фермой, способом обработки и годом урожая. Каждую партию сначала пробуем на каппинге.</p>
+            </article>
+            <article class="step">
+                <img src="{{ 'assets/images/roastery.jpg'|theme }}" alt="Барабанный ростер" loading="lazy">
+                <span class="step-num">02</span>
+                <h3>Обжарка</h3>
+                <p>Жарим небольшими партиями только то, что заказали. Профиль подбираем под лот, а не под всю линейку сразу.</p>
+            </article>
+            <article class="step">
+                <img src="{{ 'assets/images/brew.jpg'|theme }}" alt="Заваривание кофе в воронке" loading="lazy">
+                <span class="step-num">03</span>
+                <h3>Ваша чашка</h3>
+                <p>На пачке — дата обжарки и рецепт для фильтра и эспрессо. Пик вкуса — со 2-го по 30-й день после обжарки.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section wrap">
+    <ul class="perks">
+        <li>{% partial 'icon' name='flame' %}<b>Свежая обжарка</b><span>Зерно не лежит на складе: обжарка только под заказы</span></li>
+        <li>{% partial 'icon' name='truck' %}<b>СДЭК по России</b><span>Пункт выдачи или курьер, срок и цену видно сразу</span></li>
+        <li>{% partial 'icon' name='package' %}<b>Пачка с клапаном</b><span>Дегазационный клапан и зип-замок сохраняют аромат</span></li>
+        <li>{% partial 'icon' name='credit-card' %}<b>Оплата онлайн</b><span>Картой через ЮKassa, чек придёт на почту</span></li>
+    </ul>
+</section>

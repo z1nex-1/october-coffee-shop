@@ -1,17 +1,31 @@
 <div class="grid">
     {% for product in __SELF__.products %}
-        <article class="product">
-            {% partial 'pack' color=product.color name=product.name weight=product.weight_label %}
-            <h3>{{ product.name }}</h3>
-            <p class="meta">{{ product.origin }} · {{ product.process }} · {{ product.roast_label }}</p>
-            <p class="notes">{{ product.notes }}</p>
-            <div class="buy">
-                <span class="price">{{ product.price|number_format(0, ',', ' ') }} ₽ <small>/ {{ product.weight_label }}</small></span>
-                <button class="btn"
-                        data-request="shopCart::onAdd"
-                        data-request-data="id: {{ product.id }}"
-                        data-request-success="$(document).trigger('cart:changed', [data.cart, 'catalog'])"
-                        data-attach-loading>В корзину</button>
+        <article class="product" style="--tone: {{ product.color }}">
+            <div class="product-photo">
+                {% if product.photo %}
+                    <img src="{{ product.thumb(640) }}" alt="{{ product.name }}" loading="lazy" width="640" height="640">
+                {% else %}
+                    {% partial 'pack' color=product.color name=product.name weight=product.weight_label %}
+                {% endif %}
+                <span class="roast" title="Обжарка: {{ product.roast_label }}">
+                    {% for level in 1..3 %}<i class="{{ level <= product.roast_level ? 'on' }}"></i>{% endfor %}
+                    {{ product.roast_label }}
+                </span>
+            </div>
+            <div class="product-body">
+                <p class="meta">{{ product.origin }} · {{ product.process }}</p>
+                <h3>{{ product.name }}</h3>
+                <ul class="notes">
+                    {% for note in product.notes|split(', ') %}<li>{{ note }}</li>{% endfor %}
+                </ul>
+                <div class="buy">
+                    <span class="price">{{ product.price|number_format(0, ',', ' ') }} ₽ <small>{{ product.weight_label }}</small></span>
+                    <button class="btn"
+                            data-request="shopCart::onAdd"
+                            data-request-data="id: {{ product.id }}"
+                            data-request-success="$(document).trigger('cart:changed', [data.cart, 'catalog'])"
+                            data-attach-loading>В корзину</button>
+                </div>
             </div>
         </article>
     {% else %}

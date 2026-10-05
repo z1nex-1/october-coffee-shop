@@ -2,7 +2,7 @@
 <h2>Заказ</h2>
 <ul class="summary-lines">
     {% for line in cart.lines %}
-        <li><span>{{ line.product.name }} × {{ line.quantity }}</span><span>{{ line.sum|number_format(0, ',', ' ') }} ₽</span></li>
+        <li><span>{% if line.product.photo %}<img src="{{ line.product.thumb(96) }}" alt="" width="40" height="40">{% endif %}{{ line.product.name }} × {{ line.quantity }}</span><span>{{ line.sum|number_format(0, ',', ' ') }} ₽</span></li>
     {% endfor %}
 </ul>
 <p class="summary-row"><span>Вес с упаковкой</span><span>{{ (cart.weight / 1000)|number_format(2, ',', ' ') }} кг</span></p>

@@ -2,7 +2,9 @@ title = "Не найдено"
 url = "/404"
 layout = "default"
 ==
-<div class="empty">
+<div class="wrap page empty">
+    {% partial 'icon' name='coffee' %}
     <h1>Такой страницы нет</h1>
-    <a class="btn" href="{{ 'index'|page }}">К каталогу</a>
+    <p class="muted">Возможно, ссылка устарела. Зато кофе в каталоге свежий.</p>
+    <a class="btn" href="{{ 'index'|page }}#catalog">К каталогу</a>
 </div>

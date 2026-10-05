@@ -1,0 +1,39 @@
+title = "Фото, шрифты и иконки"
+url = "/credits"
+layout = "default"
+==
+{% set photos = [
+    {'used': 'Главный экран', 'title': 'Roasted coffee beans on the surface. 01', 'artist': 'A S M Jobaer', 'license': 'CC BY-SA 4.0', 'url': 'https://commons.wikimedia.org/wiki/File:Roasted_coffee_beans_on_the_surface._01.jpg'},
+    {'used': 'Обжарка', 'title': 'Officine Vittoria Lido Coffee Roaster-2', 'artist': 'Visitor7', 'license': 'CC BY-SA 3.0', 'url': 'https://commons.wikimedia.org/wiki/File:Officine_Vittoria_Lido_Coffee_Roaster-2.jpg'},
+    {'used': 'Зелёное зерно', 'title': 'Coffee Processing – Drying the beans', 'artist': 'Ludger001', 'license': 'CC BY-SA 4.0', 'url': 'https://commons.wikimedia.org/wiki/File:Coffee_Processing_%E2%80%93_Drying_the_beans.jpg'},
+    {'used': 'Ваша чашка', 'title': 'Manual drip (pour-over) coffee', 'artist': 'Kim Sanso', 'license': 'CC0', 'url': 'https://commons.wikimedia.org/wiki/File:Manual_drip_(pour-over)_coffee.jpg'},
+    {'used': 'Эфиопия Иргачеффе', 'title': 'Roasted coffee beans in white bowl', 'artist': 'Alorin', 'license': 'CC BY 4.0', 'url': 'https://commons.wikimedia.org/wiki/File:Roasted_coffee_beans_in_white_bowl.png'},
+    {'used': 'Кения AA Ньери', 'title': 'Coffee cherries 咖啡果 - panoramio', 'artist': 'lienyuan lee', 'license': 'CC BY 3.0', 'url': 'https://commons.wikimedia.org/wiki/File:Coffee_cherries_%E5%92%96%E5%95%A1%E6%9E%9C_-_panoramio.jpg'},
+    {'used': 'Колумбия Уила', 'title': 'Coffee cherries of varying ripeness, on a tree in Colombia (by Brian Smith)', 'artist': 'U. S. Fish and Wildlife Service - Northeast Region', 'license': 'Public domain', 'url': 'https://commons.wikimedia.org/wiki/File:Coffee_cherries_of_varying_ripeness,_on_a_tree_in_Colombia_(by_Brian_Smith).jpg'},
+    {'used': 'Бразилия Серрадо', 'title': 'Roasted coffee beans', 'artist': 'MarkSweep', 'license': 'Public domain', 'url': 'https://commons.wikimedia.org/wiki/File:Roasted_coffee_beans.jpg'},
+    {'used': 'Гватемала Антигуа', 'title': 'Roasted Coffee Beans Texture', 'artist': 'freestock.ca', 'license': 'CC BY-SA 3.0', 'url': 'https://commons.wikimedia.org/wiki/File:Roasted_Coffee_Beans_Texture.jpg'},
+    {'used': 'Руанда Ньямашеке', 'title': 'Coffee-cherries-green-coffee-tarrazu-costa-rica', 'artist': 'Tarrazu at en.wikipedia', 'license': 'Public domain', 'url': 'https://commons.wikimedia.org/wiki/File:Coffee-cherries-green-coffee-tarrazu-costa-rica.jpg'},
+    {'used': 'Эспрессо-смесь «Утро»', 'title': 'Espresso BW 1', 'artist': 'Berthold Werner', 'license': 'Public domain', 'url': 'https://commons.wikimedia.org/wiki/File:Espresso_BW_1.jpg'},
+    {'used': 'Колумбия декаф', 'title': '2023-09-27 Latte Macchiato', 'artist': 'Maksym Kozlenko', 'license': 'CC BY-SA 4.0', 'url': 'https://commons.wikimedia.org/wiki/File:2023-09-27_Latte_Macchiato.jpg'}
+] %}
+<div class="wrap page credits">
+    <h1>Фото, шрифты и иконки</h1>
+    <p class="lead">Все фотографии на сайте взяты с Wikimedia Commons под свободными лицензиями. Для сайта они обрезаны и уменьшены, оригиналы — по ссылкам. Спасибо авторам.</p>
+
+    <table class="credits-table">
+        <thead><tr><th>Где на сайте</th><th>Фото</th><th>Автор</th><th>Лицензия</th></tr></thead>
+        <tbody>
+        {% for photo in photos %}
+            <tr>
+                <td>{{ photo.used }}</td>
+                <td><a href="{{ photo.url }}" rel="noopener">{{ photo.title }}</a></td>
+                <td>{{ photo.artist }}</td>
+                <td>{{ photo.license }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Шрифты и иконки</h2>
+    <p>Шрифты <a href="https://fonts.google.com/specimen/Playfair+Display" rel="noopener">Playfair Display</a> и <a href="https://fonts.google.com/specimen/Manrope" rel="noopener">Manrope</a> — SIL Open Font License 1.1, подключены с нашего сервера. Иконки — <a href="https://lucide.dev" rel="noopener">Lucide</a>, лицензия ISC.</p>
+</div>

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 const money = (value) => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
 
-function MiniCart({ initialCart, cartUrl, checkoutUrl }) {
+function MiniCart({ initialCart, cartUrl, checkoutUrl, icons }) {
     const [cart, setCart] = useState(initialCart);
     const [open, setOpen] = useState(false);
     const [busy, setBusy] = useState(false);
@@ -52,7 +52,9 @@ function MiniCart({ initialCart, cartUrl, checkoutUrl }) {
                 aria-expanded={open}
                 onClick={() => setOpen(!open)}
             >
-                Корзина <b>{cart.count}</b>
+                <svg className="icon" aria-hidden="true"><use href={icons + '#shopping-bag'} /></svg>
+                <span className="mini-cart-label">Корзина</span>
+                <b>{cart.count}</b>
             </button>
 
             {open && (
@@ -64,7 +66,9 @@ function MiniCart({ initialCart, cartUrl, checkoutUrl }) {
                             <ul>
                                 {cart.lines.map((line) => (
                                     <li key={line.id}>
-                                        <span className="swatch" style={{ background: line.color }} />
+                                        {line.image
+                                            ? <img className="thumb" src={line.image} alt="" width="48" height="48" />
+                                            : <span className="thumb" style={{ background: line.color }} />}
                                         <span>
                                             {line.name}
                                             <br />
@@ -103,6 +107,7 @@ if (mount) {
             initialCart={JSON.parse(mount.dataset.cart)}
             cartUrl={mount.dataset.cartUrl}
             checkoutUrl={mount.dataset.checkoutUrl}
+            icons={mount.dataset.icons}
         />
     );
 }

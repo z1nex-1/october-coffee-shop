@@ -7,9 +7,10 @@ description = "Основной шаблон"
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ this.page.title }} · Обжарка «Зерно»</title>
-    <meta name="description" content="Демо-магазин на October CMS: корзина на AJAX, оплата через ЮKassa с вебхуками, доставка СДЭК.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='16' rx='10' ry='14' fill='%235b3a24'/%3E%3Cpath d='M16 3c-4 8 4 18 0 26' stroke='%23f3e7d9' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+    <title>{{ this.page.title }} · Обжарочная «Зерно»</title>
+    <meta name="description" content="Обжарочная «Зерно»: specialty-кофе свежей обжарки из Эфиопии, Кении, Колумбии и Бразилии. Обжариваем под заказ, доставляем СДЭК по России.">
+    <link rel="icon" href="{{ 'assets/images/favicon.svg'|theme }}" type="image/svg+xml">
+    <link rel="preload" href="{{ 'assets/dist/fonts/manrope-cyrillic-wght-normal.woff2'|theme }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ 'assets/dist/app.css'|theme }}">
     {% styles %}
 </head>
@@ -21,25 +22,47 @@ description = "Основной шаблон"
                 <span>Зерно<small>обжарочная</small></span>
             </a>
             <nav class="nav">
-                <a href="{{ 'index'|page }}" {{ this.page.id == 'index' ? 'aria-current="page"' }}>Кофе</a>
+                <a href="{{ 'index'|page }}#catalog">Кофе</a>
+                <a href="{{ 'index'|page }}#process">Как мы работаем</a>
                 <a href="{{ 'cart'|page }}" {{ this.page.id == 'cart' ? 'aria-current="page"' }}>Корзина</a>
             </nav>
             <div id="mini-cart"
                  data-cart="{{ shopCart.cart.toArray|json_encode }}"
                  data-cart-url="{{ 'cart'|page }}"
-                 data-checkout-url="{{ 'checkout'|page }}"></div>
+                 data-checkout-url="{{ 'checkout'|page }}"
+                 data-icons="{{ 'assets/dist/icons.svg'|theme }}"></div>
         </div>
     </header>
 
-    <main class="wrap">
+    <main>
         {% page %}
     </main>
 
     <footer class="footer">
-        <div class="wrap">
-            Демо-стенд: оплата в песочнице, деньги не списываются, доставка считается в тестовом API СДЭК.
-            Данные сбрасываются каждую ночь.
-            <a href="https://github.com/z1nex-1/october-coffee-shop">Исходный код</a>
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <a class="logo" href="{{ 'index'|page }}">
+                    {% partial 'bean' %}
+                    <span>Зерно<small>обжарочная</small></span>
+                </a>
+                <p>Небольшая обжарочная specialty-кофе. Обжариваем под заказ и отправляем, пока зерно свежее.</p>
+            </div>
+            <div>
+                <h4>Магазин</h4>
+                <a href="{{ 'index'|page }}#catalog">Каталог</a>
+                <a href="{{ 'cart'|page }}">Корзина</a>
+                <a href="{{ 'checkout'|page }}">Оформление</a>
+            </div>
+            <div>
+                <h4>Покупателям</h4>
+                <p>{% partial 'icon' name='truck' %} СДЭК по всей России</p>
+                <p>{% partial 'icon' name='credit-card' %} Оплата картой через ЮKassa</p>
+                <p>{% partial 'icon' name='map-pin' %} Самовывоз в Москве</p>
+            </div>
+        </div>
+        <div class="wrap footer-bottom">
+            <span>© {{ "now"|date("Y") }} Обжарочная «Зерно»</span>
+            <a href="{{ 'credits'|page }}">Фото, шрифты и иконки</a>
         </div>
     </footer>
 

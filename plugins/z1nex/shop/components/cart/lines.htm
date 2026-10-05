@@ -7,12 +7,13 @@
 {% else %}
     <table class="cart-table">
         <thead>
-            <tr><th>Кофе</th><th>Цена</th><th>Количество</th><th>Сумма</th><th></th></tr>
+            <tr><th colspan="2">Кофе</th><th>Цена</th><th>Количество</th><th>Сумма</th><th></th></tr>
         </thead>
         <tbody>
         {% for line in cart.lines %}
             <tr>
-                <td>{{ line.product.name }} <small>{{ line.product.weight_label }}</small></td>
+                <td class="cart-thumb">{% if line.product.photo %}<img src="{{ line.product.thumb(160) }}" alt="" width="64" height="64">{% endif %}</td>
+                <td><b>{{ line.product.name }}</b><br><small>{{ line.product.origin }} · {{ line.product.weight_label }}</small></td>
                 <td>{{ line.product.price|number_format(0, ',', ' ') }} ₽</td>
                 <td>
                     <select name="quantity"
@@ -36,7 +37,7 @@
         </tbody>
     </table>
     <div class="cart-total">
-        <p>Товары: <b>{{ cart.itemsTotal|number_format(0, ',', ' ') }} ₽</b></p>
+        <p class="cart-sum">Товары: <b>{{ cart.itemsTotal|number_format(0, ',', ' ') }} ₽</b></p>
         {% if cart.isFreeDelivery %}
             <p class="ok">Доставка СДЭК бесплатно</p>
         {% else %}
