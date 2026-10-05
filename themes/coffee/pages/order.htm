@@ -1,0 +1,8 @@
+title = "Заказ"
+url = "/order/:hash"
+layout = "default"
+
+[shopOrderStatus]
+hash = "{{ :hash }}"
+==
+{% component 'shopOrderStatus' %}
