@@ -51,6 +51,13 @@ tabs:
         notes:
             tab: Кофе
             label: Ноты во вкусе
+        photo:
+            tab: Товар
+            label: Фото
+            type: fileupload
+            mode: image
+            imageWidth: 240
+            imageHeight: 240
         description:
             tab: Кофе
             label: Описание

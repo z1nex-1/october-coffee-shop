@@ -2,6 +2,7 @@
 
 use Db;
 use Illuminate\Console\Command;
+use Z1nex\Shop\Models\Product;
 use Z1nex\Shop\Updates\SeedProducts;
 
 class ResetDemo extends Command
@@ -13,6 +14,10 @@ class ResetDemo extends Command
     public function handle()
     {
         Db::transaction(function () {
+            Product::with('photo')->get()->each(function ($product) {
+                $product->photo && $product->photo->delete();
+            });
+
             foreach (['z1nex_shop_payment_events', 'z1nex_shop_order_items', 'z1nex_shop_orders', 'z1nex_shop_sandbox_payments', 'z1nex_shop_products'] as $table) {
                 Db::table($table)->delete();
             }

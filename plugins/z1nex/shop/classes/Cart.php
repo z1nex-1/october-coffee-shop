@@ -153,6 +153,7 @@ class Cart
                     'name'     => $line->product->name,
                     'weight'   => $line->product->weight_label,
                     'color'    => $line->product->color,
+                    'image'    => $line->product->thumb(96),
                     'price'    => $line->product->price,
                     'quantity' => $line->quantity,
                     'sum'      => $line->sum,

@@ -7,6 +7,13 @@ if [ -z "$APP_KEY" ]; then
     export APP_KEY="$(cat /data/app.key)"
 fi
 
+# фото товаров лежат в system_files, поэтому живут на том же томе, что и база
+mkdir -p /data/uploads
+if [ ! -L storage/app/uploads ]; then
+    rm -rf storage/app/uploads
+    ln -s /data/uploads storage/app/uploads
+fi
+
 touch "$DB_DATABASE"
 php artisan october:up
 

@@ -28,6 +28,10 @@ class Product extends Model
         'color'  => ['regex:/^#[0-9a-fA-F]{6}$/'],
     ];
 
+    public $attachOne = [
+        'photo' => ['System\Models\File', 'delete' => true],
+    ];
+
     public static $roasts = [
         'light'  => 'светлая',
         'medium' => 'средняя',
@@ -47,6 +51,16 @@ class Product extends Model
     public function getRoastLabelAttribute()
     {
         return array_get(self::$roasts, $this->roast, $this->roast);
+    }
+
+    public function getRoastLevelAttribute()
+    {
+        return array_search($this->roast, array_keys(self::$roasts)) + 1;
+    }
+
+    public function thumb($size)
+    {
+        return $this->photo ? $this->photo->getThumb($size, $size, ['mode' => 'crop']) : null;
     }
 
     public function getWeightLabelAttribute()

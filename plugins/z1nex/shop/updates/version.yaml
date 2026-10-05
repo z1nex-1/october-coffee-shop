@@ -5,3 +5,6 @@
     - create_payment_events_table.php
     - create_sandbox_payments_table.php
     - seed_products.php
+1.0.2:
+    - Фото товаров
+    - attach_product_photos.php
